@@ -5,9 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import app.khodko.catfood.R
 import app.khodko.catfood.core.extension.getViewModelExt
 import app.khodko.catfood.databinding.FragmentInfoBinding
-import app.khodko.catfood.R
 
 class InfoFragment : Fragment() {
 
