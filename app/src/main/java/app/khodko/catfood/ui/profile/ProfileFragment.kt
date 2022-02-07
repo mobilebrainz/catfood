@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import app.khodko.catfood.core.extension.getViewModelExt
 import app.khodko.catfood.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
@@ -14,16 +14,18 @@ class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var profileViewModel: ProfileViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dashboardViewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
+        profileViewModel = getViewModelExt { ProfileViewModel() }
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
 
         val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
+        profileViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return binding.root
