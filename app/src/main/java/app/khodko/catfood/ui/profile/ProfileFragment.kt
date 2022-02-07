@@ -24,10 +24,6 @@ class ProfileFragment : Fragment() {
         profileViewModel = getViewModelExt { ProfileViewModel() }
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
 
-        val textView: TextView = binding.textDashboard
-        profileViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
         return binding.root
     }
 
