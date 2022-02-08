@@ -1,28 +1,37 @@
 // общая страница для всех типов кошачих кормов
 https://catalog.onliner.by/sdapi/catalog.api/search/catfood?group=1
+https://catalog.api.onliner.by/search/catfood
 // page 2
 https://catalog.onliner.by/sdapi/catalog.api/search/catfood?group=1&page=2
+https://catalog.api.onliner.by/search/catfood?page=2
 
 
 // сухой корм - page1
 https://catalog.onliner.by/sdapi/catalog.api/search/catfood?typefood4cat[0]=dryfood&typefood4cat[operation]=union&group=1
 // page 2
 https://catalog.onliner.by/sdapi/catalog.api/search/catfood?typefood4cat[0]=dryfood&typefood4cat[operation]=union&group=1&page=2
-
+https://catalog.api.onliner.by/search/catfood?typefood4cat=dryfood&page=2
 
 // консервы - page1
 https://catalog.onliner.by/sdapi/catalog.api/search/catfood?typefood4cat[0]=canned&typefood4cat[operation]=union&group=1
 // page 2
 https://catalog.onliner.by/sdapi/catalog.api/search/catfood?typefood4cat[0]=canned&typefood4cat[operation]=union&group=1&page=2
-
+https://catalog.api.onliner.by/search/catfood?typefood4cat=canned&page=2
 
 // пресервы - page1
 https://catalog.onliner.by/sdapi/catalog.api/search/catfood?typefood4cat[0]=preservs&typefood4cat[operation]=union&group=1
 // page 2
 https://catalog.onliner.by/sdapi/catalog.api/search/catfood?typefood4cat[0]=preservs&typefood4cat[operation]=union&group=1&page=2
-
+https://catalog.api.onliner.by/search/catfood?typefood4cat=preservs&page=2
 
 //лакомства - page1
 https://catalog.onliner.by/sdapi/catalog.api/search/catfood?typefood4cat[0]=tasty&typefood4cat[operation]=union&group=1
 // page 2
 https://catalog.onliner.by/sdapi/catalog.api/search/catfood?typefood4cat[0]=tasty&typefood4cat[operation]=union&group=1&page=2
+https://catalog.api.onliner.by/search/catfood?typefood4cat=tasty&page=2
+
+
+// конкретный продукт
+https://catalog.api.onliner.by/products/<product-key>
+
+
