@@ -17,8 +17,8 @@ class OnlinerRequest : OnlinerRequestInterface {
             ONLINER_WEB_SERVICE
         )
 
-    override suspend fun getProductsAsync(typefood: String, page: Int) =
-        createJsonRetrofitService().getProductsAsync(typefood, page)
+    override suspend fun getProductsAsync(typefood: CatFoodType, page: Int) =
+        createJsonRetrofitService().getProductsAsync(typefood.getType(), page)
 
     override suspend fun getProductAsync(key: String) =
         createJsonRetrofitService().getProductAsync(key)

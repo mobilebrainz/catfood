@@ -9,15 +9,11 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 object WebService {
 
-    const val TIMEOUT = 20000L
     const val LEVEL_LOG_DEBUG = true
-    //const val USER_AGENT_HEADER = "app.khodko.catfood"
-    const val USER_AGENT_HEADER = ""
 
     private val headerInterceptor = Interceptor { chain ->
         val request = chain.request()
             .newBuilder()
-            .header("User-Agent", USER_AGENT_HEADER)
             .build()
         chain.proceed(request)
     }
@@ -28,10 +24,6 @@ object WebService {
     }
 
     private val httpClient: OkHttpClient = OkHttpClient.Builder()
-        //.callTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
-        //.connectTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
-        //.readTimeout(120, TimeUnit.SECONDS)
-        //.writeTimeout(90, TimeUnit.SECONDS)
         .addNetworkInterceptor(loggingIntercepter)
         .addInterceptor(headerInterceptor)
         .build()
@@ -41,5 +33,4 @@ object WebService {
             .addConverterFactory(MoshiConverterFactory.create())
             .client(httpClient).build()
             .create(retrofitClass)
-
 }

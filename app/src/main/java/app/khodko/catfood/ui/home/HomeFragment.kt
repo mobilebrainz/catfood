@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import app.khodko.catfood.api.onliner.CatFoodType
 import app.khodko.catfood.core.extension.getViewModelExt
 import app.khodko.catfood.databinding.FragmentHomeBinding
 
@@ -23,7 +24,13 @@ class HomeFragment : Fragment() {
         homeViewModel = getViewModelExt { HomeViewModel() }
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
+        load()
+
         return binding.root
+    }
+
+    private fun load() {
+        homeViewModel.loadProducts(CatFoodType.DRYFOOD, 1)
     }
 
     override fun onDestroyView() {

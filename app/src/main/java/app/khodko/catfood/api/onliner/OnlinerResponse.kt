@@ -5,7 +5,7 @@ import com.squareup.moshi.Json
 
 
 data class SearchResponse(
-    @field:Json(name = "products") val def: List<ProductResponse>? = null
+    @field:Json(name = "products") val products: List<ProductResponse>? = null
 ): RetrofitObject()
 
 data class ProductResponse(
