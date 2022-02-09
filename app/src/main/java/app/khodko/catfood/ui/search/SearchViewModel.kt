@@ -1,9 +1,9 @@
-package app.khodko.catfood.ui.home
+package app.khodko.catfood.ui.search
 
 import androidx.lifecycle.*
 import app.khodko.catfood.core.utils.UiAction
 import app.khodko.catfood.data.SearchRepository
-import app.khodko.catfood.model.SearchResult
+import app.khodko.catfood.data.SearchResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch

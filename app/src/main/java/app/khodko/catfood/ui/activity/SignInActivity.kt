@@ -1,4 +1,4 @@
-package app.khodko.catfood.activity
+package app.khodko.catfood.ui.activity
 
 import android.content.Intent
 import android.os.Bundle

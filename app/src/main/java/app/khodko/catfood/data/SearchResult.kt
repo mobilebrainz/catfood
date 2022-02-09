@@ -1,4 +1,4 @@
-package app.khodko.catfood.model
+package app.khodko.catfood.data
 
 import app.khodko.catfood.api.onliner.ProductResponse
 

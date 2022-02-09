@@ -1,4 +1,4 @@
-package app.khodko.catfood.activity
+package app.khodko.catfood.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -33,7 +33,7 @@ class MainActivity : BaseSignInActivity() {
         val navView: BottomNavigationView = binding.navView
         navController = findNavController(R.id.nav_host_fragment_activity_main)
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.nav_home, R.id.nav_profile, R.id.nav_info)
+            setOf(R.id.nav_home, R.id.nav_search, R.id.nav_profile, R.id.nav_info)
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)

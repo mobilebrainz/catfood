@@ -3,7 +3,6 @@ package app.khodko.catfood.data
 import android.util.Log
 import app.khodko.catfood.api.onliner.OnlinerService
 import app.khodko.catfood.api.onliner.ProductResponse
-import app.khodko.catfood.model.SearchResult
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import retrofit2.HttpException

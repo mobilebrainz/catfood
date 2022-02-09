@@ -2,6 +2,7 @@
     <string name="app_name">Cat Food</string>
     <string name="sign_in_activity_label">Sign In</string>
     <string name="title_home">Home</string>
+    <string name="title_search">Search</string>
     <string name="title_profile">Profile</string>
     <string name="title_info">Info</string>
     <string name="options_logout">LogOut</string>
