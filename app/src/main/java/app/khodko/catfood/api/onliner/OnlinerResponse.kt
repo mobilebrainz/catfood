@@ -5,7 +5,7 @@ import com.squareup.moshi.Json
 
 
 data class SearchResponse(
-    @field:Json(name = "products") val products: List<ProductResponse>? = null,
+    @field:Json(name = "products") val products: List<ProductResponse> = emptyList(),
     @field:Json(name = "total") val total: Int,
     @field:Json(name = "page") val page: PageResponse,
 ): RetrofitObject()

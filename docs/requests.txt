@@ -37,4 +37,4 @@ https://catalog.api.onliner.by/products/<product-key>
 
 // поиск продукта
 https://catalog.onliner.by/sdapi/catalog.api/search/products?query=royal+canin
-https://catalog.api.onliner.by/search/products?query=royal+canin
+https://catalog.api.onliner.by/search/products?query=royal+canin&page=2&limit=30

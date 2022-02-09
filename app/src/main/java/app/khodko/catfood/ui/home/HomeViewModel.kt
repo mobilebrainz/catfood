@@ -2,7 +2,7 @@ package app.khodko.catfood.ui.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import app.khodko.catfood.api.domain.OnlinerRepository
+import app.khodko.catfood.data.OnlinerRepository
 import app.khodko.catfood.api.onliner.CatFoodType
 import kotlinx.coroutines.launch
 

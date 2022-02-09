@@ -1,4 +1,4 @@
-package app.khodko.catfood.api.domain
+package app.khodko.catfood.data
 
 import androidx.annotation.WorkerThread
 import app.khodko.catfood.api.onliner.CatFoodType
