@@ -51,5 +51,5 @@ data class PriceResponse(
 )
 
 data class OffersResponse(
-    @field:Json(name = "count") val id: Int?,
+    @field:Json(name = "count") val count: Int?,
 )

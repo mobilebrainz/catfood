@@ -9,7 +9,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-private const val PAGE_LIMIT = 20
+private const val PAGE_LIMIT = 30
 
 interface OnlinerService {
 

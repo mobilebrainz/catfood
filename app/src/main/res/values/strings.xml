@@ -7,6 +7,7 @@
     <string name="title_info">Info</string>
     <string name="options_logout">LogOut</string>
     <string name="helper_pager_footer">Page %1$d of %2$d</string>
+    <string name="prices">Prices</string>
 
     <string name="search_hint">GitHub Repository</string>
     <string name="no_results">No results 😓</string>

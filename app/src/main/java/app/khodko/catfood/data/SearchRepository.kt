@@ -12,13 +12,8 @@ import java.io.IOException
 class SearchRepository() {
 
     private val service = OnlinerService.create()
-    // keep the list of all results received
     private val inMemoryCache = mutableListOf<ProductResponse>()
-
-    // shared flow of results, which allows us to broadcast updates so
-    // the subscriber will have the latest data
     private val searchResults = MutableSharedFlow<SearchResult>(replay = 1)
-
     private var lastRequestedPage = 1
     private var lastPage = 1
     private var isRequestInProgress = false
