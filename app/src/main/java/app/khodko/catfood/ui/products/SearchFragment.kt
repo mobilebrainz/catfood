@@ -12,14 +12,14 @@ import androidx.lifecycle.map
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import app.khodko.catfood.R
 import app.khodko.catfood.api.onliner.KeyType
 import app.khodko.catfood.api.onliner.Query
 import app.khodko.catfood.core.BaseFragment
 import app.khodko.catfood.core.extension.getViewModelExt
-import app.khodko.catfood.databinding.FragmentSearchBinding
-import app.khodko.catfood.data.SearchResult
-import app.khodko.catfood.R
 import app.khodko.catfood.core.extension.hideSoftKeyboardExt
+import app.khodko.catfood.data.SearchResult
+import app.khodko.catfood.databinding.FragmentSearchBinding
 
 private const val DEFAULT_QUERY = "Royal Canin"
 

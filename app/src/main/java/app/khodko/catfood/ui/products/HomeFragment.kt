@@ -1,9 +1,8 @@
 package app.khodko.catfood.ui.products
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.core.view.isVisible
 import androidx.lifecycle.distinctUntilChanged
 import androidx.lifecycle.map
@@ -15,6 +14,7 @@ import app.khodko.catfood.api.onliner.KeyType
 import app.khodko.catfood.api.onliner.Query
 import app.khodko.catfood.core.BaseFragment
 import app.khodko.catfood.core.extension.getViewModelExt
+import app.khodko.catfood.core.extension.navigateExt
 import app.khodko.catfood.data.SearchResult
 import app.khodko.catfood.databinding.FragmentHomeBinding
 
@@ -24,6 +24,11 @@ class HomeFragment : BaseFragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var pagedProductsViewModel: PagedProductsViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -123,6 +128,22 @@ class HomeFragment : BaseFragment() {
         val decoration = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
         binding.recycler.addItemDecoration(decoration)
     }
+
+    @SuppressLint("RestrictedApi")
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        //menu.clear()
+        inflater.inflate(R.menu.home_fragment_options_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) =
+        when (item.itemId) {
+            R.id.filter -> {
+                navigateExt(HomeFragmentDirections.actionNavHomeToNavFilter())
+                true
+            }
+            else -> false
+        }
 
     override fun onDestroyView() {
         super.onDestroyView()

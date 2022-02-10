@@ -12,7 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView android:id="@+id/emptyList"
+        <TextView
+            android:id="@+id/emptyList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -28,5 +29,6 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     </FrameLayout>
+
 
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
