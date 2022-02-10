@@ -1,27 +1,27 @@
-package app.khodko.catfood.ui.search
+package app.khodko.catfood.ui.home
 
 import androidx.lifecycle.*
-import app.khodko.catfood.data.SearchRepository
+import app.khodko.catfood.api.onliner.Query
+import app.khodko.catfood.data.CatfoodRepository
 import app.khodko.catfood.data.SearchResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 private const val VISIBLE_THRESHOLD = 10
-private const val DEFAULT_QUERY = "Royal Canin"
 
-class SearchViewModel : ViewModel() {
+class CatfoodViewModel : ViewModel() {
 
     val state: LiveData<UiState>
     val accept: (UiAction) -> Unit
-    private val repository = SearchRepository()
+    private val repository = CatfoodRepository()
 
     init {
-        val queryLiveData = MutableLiveData(DEFAULT_QUERY)
+        val queryLiveData = MutableLiveData(Query())
 
         state = queryLiveData.distinctUntilChanged().switchMap { query ->
             liveData {
-                val uiState = repository.getSearchResultStream(query)
+                val uiState = repository.start(query)
                     .map { UiState(query = query, searchResult = it) }
                     .asLiveData(Dispatchers.Main)
                 emitSource(uiState)
@@ -47,12 +47,12 @@ private val UiAction.Scroll.shouldFetchMore
 
 
 data class UiState(
-    val query: String,
+    val query: Query,
     val searchResult: SearchResult
 )
 
 sealed class UiAction {
-    data class Search(val query: String) : UiAction()
+    data class Search(val query: Query) : UiAction()
     data class Scroll(
         val visibleItemCount: Int,
         val lastVisibleItemPosition: Int,

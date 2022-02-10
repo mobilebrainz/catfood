@@ -41,3 +41,9 @@ https://catalog.api.onliner.by/search/products?query=royal+canin&page=2&limit=30
 
 // картинки
 https://content2.onliner.by/catalog/device/header/6f6c8c3bc0263ff0462232f643f8909a.png
+
+
+// параметры
+mfr - производитель
+typefood4cat - тип корма
+https://catalog.api.onliner.by/search/catfood?mfr=proplan&typefood4cat=dryfood

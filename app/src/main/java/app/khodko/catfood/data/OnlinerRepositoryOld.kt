@@ -4,7 +4,7 @@ import androidx.annotation.WorkerThread
 import app.khodko.catfood.api.onliner.CatFoodType
 import app.khodko.catfood.api.onliner.OnlinerRequest
 
-class OnlinerRepository {
+class OnlinerRepositoryOld {
 
     @WorkerThread
     suspend fun getProductsAsync(typefood: CatFoodType, page: Int) =

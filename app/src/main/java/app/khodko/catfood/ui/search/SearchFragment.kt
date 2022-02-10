@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.khodko.catfood.core.extension.getViewModelExt
-import app.khodko.catfood.core.utils.UiAction
 import app.khodko.catfood.databinding.FragmentSearchBinding
 import app.khodko.catfood.data.SearchResult
 

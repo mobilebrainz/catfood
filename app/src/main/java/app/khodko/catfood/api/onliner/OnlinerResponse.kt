@@ -1,6 +1,5 @@
 package app.khodko.catfood.api.onliner
 
-import app.khodko.catfood.api.RetrofitObject
 import com.squareup.moshi.Json
 
 
@@ -8,7 +7,7 @@ data class SearchResponse(
     @field:Json(name = "products") val products: List<ProductResponse> = emptyList(),
     @field:Json(name = "total") val total: Int,
     @field:Json(name = "page") val page: PageResponse,
-): RetrofitObject()
+)
 
 data class PageResponse(
     @field:Json(name = "limit") val limit: Int,
@@ -30,7 +29,7 @@ data class ProductResponse(
     @field:Json(name = "url") val apiUrl: String,
     @field:Json(name = "prices") val prices: PricesResponse?,
     @field:Json(name = "images") val images: ImagesResponse?,
-): RetrofitObject()
+)
 
 data class ImagesResponse(
     @field:Json(name = "header") val header: String?,
