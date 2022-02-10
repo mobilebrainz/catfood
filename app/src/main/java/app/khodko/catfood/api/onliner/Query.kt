@@ -8,13 +8,15 @@ private const val PARAM_LIMIT = "limit"
 
 private const val LIMIT = 30
 
-class Query() {
+class Query(val key: KeyType) {
 
     var searchQuery: String? = null
-    var page: Int = 1
     var typefood: CatFoodType? = null
     var brand: BrandType? = null
+    var page: Int = 1
     var limit: Int = LIMIT
+
+    fun key() = key.type
 
     fun map(): Map<String, String> {
         val map = mutableMapOf<String, String>()

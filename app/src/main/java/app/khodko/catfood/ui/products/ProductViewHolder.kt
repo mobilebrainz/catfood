@@ -1,4 +1,4 @@
-package app.khodko.catfood.ui.search
+package app.khodko.catfood.ui.products
 
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +10,7 @@ import app.khodko.catfood.R
 import app.khodko.catfood.api.onliner.ProductResponse
 import app.khodko.catfood.core.extension.showExt
 
-class SearchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private val productImage: ImageView = view.findViewById(R.id.productImage)
     private val nameView: TextView = view.findViewById(R.id.nameView)
@@ -76,10 +76,10 @@ class SearchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     }
 
     companion object {
-        fun create(parent: ViewGroup): SearchViewHolder {
+        fun create(parent: ViewGroup): ProductViewHolder {
             val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.onliner_view_item, parent, false)
-            return SearchViewHolder(view)
+                .inflate(R.layout.product_view_item, parent, false)
+            return ProductViewHolder(view)
         }
     }
 }

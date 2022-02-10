@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="app.khodko.catfood.ui.home.HomeFragment"
+        android:name="app.khodko.catfood.ui.products.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_search"
-        android:name="app.khodko.catfood.ui.search.SearchFragment"
+        android:name="app.khodko.catfood.ui.products.SearchFragment"
         android:label="@string/title_search"
         tools:layout="@layout/fragment_search" />
 

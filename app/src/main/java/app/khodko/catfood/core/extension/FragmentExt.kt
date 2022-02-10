@@ -24,3 +24,7 @@ fun Fragment.showSoftKeyboardExt(view: View) {
         inputMethodManager.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
     }
 }
+
+fun Fragment.hideSoftKeyboardExt() {
+    activity?.hideSoftKeyboardExt()
+}

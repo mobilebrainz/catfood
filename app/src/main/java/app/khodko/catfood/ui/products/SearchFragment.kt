@@ -1,4 +1,4 @@
-package app.khodko.catfood.ui.home
+package app.khodko.catfood.ui.products
 
 import android.os.Bundle
 import android.view.KeyEvent
@@ -6,86 +6,91 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.widget.Toast
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.distinctUntilChanged
 import androidx.lifecycle.map
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import app.khodko.catfood.api.onliner.KeyType
+import app.khodko.catfood.api.onliner.Query
+import app.khodko.catfood.core.BaseFragment
 import app.khodko.catfood.core.extension.getViewModelExt
+import app.khodko.catfood.databinding.FragmentSearchBinding
 import app.khodko.catfood.data.SearchResult
-import app.khodko.catfood.databinding.FragmentHomeBinding
-import app.khodko.catfood.ui.search.SearchAdapter
-import app.khodko.catfood.ui.search.SearchViewModel
-import app.khodko.catfood.ui.home.UiAction
-import app.khodko.catfood.ui.home.UiState
+import app.khodko.catfood.R
+import app.khodko.catfood.core.extension.hideSoftKeyboardExt
 
-class HomeFragment : Fragment() {
+private const val DEFAULT_QUERY = "Royal Canin"
 
-    private var _binding: FragmentHomeBinding? = null
+class SearchFragment : BaseFragment() {
+
+    private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
-    private lateinit var catfoodViewModel: CatfoodViewModel
+    private lateinit var pagedProductsViewModel: PagedProductsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        catfoodViewModel = getViewModelExt { CatfoodViewModel() }
+        _binding = FragmentSearchBinding.inflate(inflater, container, false)
+        val defaultQuery = Query(KeyType.PRODUCTS)
+        defaultQuery.searchQuery = DEFAULT_QUERY
+        pagedProductsViewModel = getViewModelExt { PagedProductsViewModel(defaultQuery) }
         addDividers()
         bindState()
-        binding.swipeRefreshLayout.isEnabled = false
         return binding.root
     }
 
     private fun bindState() {
-        val adapter = SearchAdapter()
-        binding.recycler.adapter = adapter
+        val adapter = ProductsAdapter()
+        binding.list.adapter = adapter
 
-        //bindSearch()
+        bindSearch()
         bindList(adapter)
     }
 
-    // todo: change on filter
-    /*
     private fun bindSearch() {
-        binding.searchRepo.setOnEditorActionListener { _, actionId, _ ->
+
+        binding.searchView.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_GO) {
-                updateRepoListFromInput(searchViewModel.accept)
+                updateRepoListFromInput(pagedProductsViewModel.accept)
+                hideSoftKeyboardExt()
                 true
             } else {
                 false
             }
         }
-        binding.searchRepo.setOnKeyListener { _, keyCode, event ->
+        binding.searchView.setOnKeyListener { _, keyCode, event ->
             if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-                updateRepoListFromInput(searchViewModel.accept)
+                updateRepoListFromInput(pagedProductsViewModel.accept)
+                hideSoftKeyboardExt()
                 true
             } else {
                 false
             }
         }
-        searchViewModel.state.map(UiState::query).distinctUntilChanged()
-            .observe(viewLifecycleOwner, binding.searchRepo::setText)
+
+        pagedProductsViewModel.state.map { it.query.searchQuery }.distinctUntilChanged()
+            .observe(viewLifecycleOwner, binding.searchView::setText)
     }
 
     private fun updateRepoListFromInput(onQueryChanged: (UiAction.Search) -> Unit) {
-        binding.searchRepo.text.trim().let {
+        binding.searchView.text.trim().let {
             if (it.isNotEmpty()) {
-                binding.recycler.scrollToPosition(0)
-                onQueryChanged(UiAction.Search(query = it.toString()))
+                binding.list.scrollToPosition(0)
+                val query = Query(KeyType.PRODUCTS)
+                query.searchQuery = it.toString()
+                onQueryChanged(UiAction.Search(query))
             }
         }
     }
-    */
 
-    private fun bindList(adapter: SearchAdapter) {
-        setupScrollListener(catfoodViewModel.accept)
+    private fun bindList(adapter: ProductsAdapter) {
+        setupScrollListener(pagedProductsViewModel.accept)
 
-        catfoodViewModel.state.map(UiState::searchResult).distinctUntilChanged()
+        pagedProductsViewModel.state.map(UiState::searchResult).distinctUntilChanged()
             .observe(viewLifecycleOwner) { result ->
                 when (result) {
                     is SearchResult.Success -> {
@@ -93,24 +98,21 @@ class HomeFragment : Fragment() {
                         adapter.submitList(result.data)
                     }
                     is SearchResult.Error -> {
-                        // todo: snakebar
-                        Toast.makeText(
-                            requireContext(), "\uD83D\uDE28 Wooops $result.message}",
-                            Toast.LENGTH_LONG
-                        ).show()
+                        showErrorSnackbar(R.string.error_app, R.string.snackbar_retry)
+                            { pagedProductsViewModel.retry() }
                     }
                 }
             }
     }
 
     private fun showEmptyList(show: Boolean) {
-        //binding.emptyList.isVisible = show
-        binding.recycler.isVisible = !show
+        binding.emptyList.isVisible = show
+        binding.list.isVisible = !show
     }
 
     private fun setupScrollListener(onScrollChanged: (UiAction.Scroll) -> Unit) {
-        val layoutManager = binding.recycler.layoutManager as LinearLayoutManager
-        binding.recycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        val layoutManager = binding.list.layoutManager as LinearLayoutManager
+        binding.list.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 val totalItemCount = layoutManager.itemCount
@@ -126,7 +128,7 @@ class HomeFragment : Fragment() {
     // add dividers between RecyclerView's row items
     private fun addDividers() {
         val decoration = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
-        binding.recycler.addItemDecoration(decoration)
+        binding.list.addItemDecoration(decoration)
     }
 
     override fun onDestroyView() {

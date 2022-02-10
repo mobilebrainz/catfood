@@ -1,8 +1,8 @@
-package app.khodko.catfood.ui.home
+package app.khodko.catfood.ui.products
 
 import androidx.lifecycle.*
 import app.khodko.catfood.api.onliner.Query
-import app.khodko.catfood.data.CatfoodRepository
+import app.khodko.catfood.data.PagedOnlinerRepository
 import app.khodko.catfood.data.SearchResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
@@ -10,15 +10,14 @@ import kotlinx.coroutines.launch
 
 private const val VISIBLE_THRESHOLD = 10
 
-class CatfoodViewModel : ViewModel() {
+class PagedProductsViewModel(defaultQuery: Query) : ViewModel() {
 
     val state: LiveData<UiState>
     val accept: (UiAction) -> Unit
-    private val repository = CatfoodRepository()
+    private val repository = PagedOnlinerRepository()
+    private val queryLiveData = MutableLiveData(defaultQuery)
 
     init {
-        val queryLiveData = MutableLiveData(Query())
-
         state = queryLiveData.distinctUntilChanged().switchMap { query ->
             liveData {
                 val uiState = repository.start(query)
@@ -40,6 +39,12 @@ class CatfoodViewModel : ViewModel() {
                 }
             }
         }
+
+    fun retry() {
+        queryLiveData.value?.let {
+            viewModelScope.launch { repository.retry(it) }
+        }
+    }
 }
 
 private val UiAction.Scroll.shouldFetchMore

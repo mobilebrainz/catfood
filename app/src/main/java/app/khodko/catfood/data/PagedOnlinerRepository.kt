@@ -46,14 +46,9 @@ class PagedOnlinerRepository {
         isRequestInProgress = true
         var successful = false
         try {
-            val response = if (query.searchQuery != null) {
-                service.search(query.searchQuery!!, lastRequestedPage)
-            } else {
-                query.page = lastRequestedPage
-                service.getCatfood(query.map())
-            }
-            //val response = service.getCatfood(query.map())
-
+            query.page = lastRequestedPage
+            val response = service.search(query.key(), query.map())
+            
             lastPage = response.page.last
             Log.d("CatfoodRepository", "response $response")
             inMemoryCache.addAll(response.products)

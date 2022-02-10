@@ -1,4 +1,4 @@
-package app.khodko.catfood.ui.search
+package app.khodko.catfood.ui.products
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -6,13 +6,13 @@ import androidx.recyclerview.widget.ListAdapter
 import app.khodko.catfood.api.onliner.ProductResponse
 
 
-class SearchAdapter : ListAdapter<ProductResponse, SearchViewHolder>(REPO_COMPARATOR) {
+class ProductsAdapter : ListAdapter<ProductResponse, ProductViewHolder>(REPO_COMPARATOR) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
-        return SearchViewHolder.create(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
+        return ProductViewHolder.create(parent)
     }
 
-    override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val repoItem = getItem(position)
         if (repoItem != null) {
             holder.bind(repoItem)

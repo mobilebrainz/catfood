@@ -7,43 +7,20 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
-import retrofit2.http.Query
 import retrofit2.http.QueryMap
-
-private const val PAGE_LIMIT = 30
 
 interface OnlinerService {
 
-    @GET("search/products")
+    @GET("search/{key}")
     suspend fun search(
-        @Query("query") query: String,
-        @Query("page") page: Int,
-        @Query("limit") limit: Int = PAGE_LIMIT
-    ): SearchResponse
-
-    /*
-    Ключи для paramsMap:
-    page
-    mfr - производитель
-    typefood4cat - тип корма
-     */
-    @GET("search/catfood")
-    suspend fun getCatfood(
+        @Path("key") key: String,
         @QueryMap paramsMap: Map<String, String>
-    ): SearchResponse
-
-    @GET("search/catfood")
-    suspend fun getCatfood(
-        @Query("typefood4cat") typefood: String,
-        @Query("page") page: Int
     ): SearchResponse
 
     @GET("products/{key}")
     suspend fun getProduct(
         @Path("key") key: String
     ): ProductResponse
-
-
 
     companion object {
         private const val BASE_URL = "https://catalog.api.onliner.by/"
