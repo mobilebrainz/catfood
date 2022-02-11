@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Cat Food</string>
+    <string name="app_name" translatable="false">Cat Food</string>
     <string name="sign_in_activity_label">Sign In</string>
     <string name="title_home">Home</string>
     <string name="title_search">Search</string>

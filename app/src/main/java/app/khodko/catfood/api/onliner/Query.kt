@@ -6,7 +6,7 @@ private const val PARAM_BRAND = "mfr"
 private const val PARAM_PAGE = "page"
 private const val PARAM_LIMIT = "limit"
 
-private const val LIMIT = 30
+private const val LIMIT = 20
 
 class Query(val key: KeyType) {
 
