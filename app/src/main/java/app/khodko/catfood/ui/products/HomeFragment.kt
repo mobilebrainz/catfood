@@ -16,6 +16,7 @@ import app.khodko.catfood.api.onliner.KeyType
 import app.khodko.catfood.api.onliner.Query
 import app.khodko.catfood.core.BaseFragment
 import app.khodko.catfood.core.extension.getViewModelExt
+import app.khodko.catfood.core.extension.navigateExt
 import app.khodko.catfood.core.extension.showSelectDialogExt
 import app.khodko.catfood.data.SearchResult
 import app.khodko.catfood.databinding.FragmentHomeBinding
@@ -50,7 +51,10 @@ class HomeFragment : BaseFragment() {
     private fun bindState() {
         val adapter = ProductsAdapter()
         binding.recycler.adapter = adapter
-
+        adapter.shotClickListener = { item, _ ->
+            //if (!swipeRefreshLayout.isRefreshing)
+            navigateExt(HomeFragmentDirections.actionNavHomeToNavProduct(item.key))
+        }
         bindFilter()
         bindList(adapter)
     }

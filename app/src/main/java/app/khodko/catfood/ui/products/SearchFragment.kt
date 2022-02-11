@@ -18,6 +18,7 @@ import app.khodko.catfood.api.onliner.Query
 import app.khodko.catfood.core.BaseFragment
 import app.khodko.catfood.core.extension.getViewModelExt
 import app.khodko.catfood.core.extension.hideSoftKeyboardExt
+import app.khodko.catfood.core.extension.navigateExt
 import app.khodko.catfood.data.SearchResult
 import app.khodko.catfood.databinding.FragmentSearchBinding
 
@@ -46,6 +47,10 @@ class SearchFragment : BaseFragment() {
     private fun bindState() {
         val adapter = ProductsAdapter()
         binding.list.adapter = adapter
+        adapter.shotClickListener = { item, _ ->
+            //if (!swipeRefreshLayout.isRefreshing)
+            navigateExt(SearchFragmentDirections.actionNavSearchToNavProduct(item.key))
+        }
         bindSearch()
         bindList(adapter)
     }

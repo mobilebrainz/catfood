@@ -11,21 +11,30 @@
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_nav_home_to_nav_filter"
-            app:destination="@id/nav_filter" />
+            android:id="@+id/action_nav_home_to_nav_product"
+            app:destination="@id/nav_product" />
     </fragment>
-
-    <fragment
-        android:id="@+id/nav_filter"
-        android:name="app.khodko.catfood.ui.products.FilterProductsFragment"
-        android:label="@string/title_filter"
-        tools:layout="@layout/fragment_filter_products" />
 
     <fragment
         android:id="@+id/nav_search"
         android:name="app.khodko.catfood.ui.products.SearchFragment"
         android:label="@string/title_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_nav_search_to_nav_product"
+            app:destination="@id/nav_product" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_product"
+        android:name="app.khodko.catfood.ui.product.ProductFragment"
+        android:label="@string/title_product"
+        tools:layout="@layout/fragment_product" >
+        <argument
+            android:name="key"
+            app:argType="string"
+            app:nullable="false" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_profile"

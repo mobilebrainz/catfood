@@ -18,17 +18,6 @@ class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val priceView: TextView = view.findViewById(R.id.priceView)
     private var product: ProductResponse? = null
 
-    init {
-        /*
-        view.setOnClickListener {
-            product?.url?.let { url ->
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                view.context.startActivity(intent)
-            }
-        }
-         */
-    }
-
     fun bind(product: ProductResponse?) {
         if (product == null) {
             val resources = itemView.resources

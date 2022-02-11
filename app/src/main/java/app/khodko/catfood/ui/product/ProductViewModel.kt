@@ -1,19 +1,23 @@
 package app.khodko.catfood.ui.product
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import app.khodko.catfood.api.onliner.ProductResponse
 import app.khodko.catfood.data.OnlinerRepository
 import kotlinx.coroutines.launch
 
-class ProductViewModel : ViewModel() {
+class ProductViewModel(val key: String) : ViewModel() {
 
     private val onlinerRepository = OnlinerRepository()
 
-    fun loadProduct(key: String) {
+    private val _product = MutableLiveData<ProductResponse>().apply {
         viewModelScope.launch {
-            val response = onlinerRepository.getProductAsync(key)
-
+            // todo: exception?
+            value = onlinerRepository.getProductAsync(key)
         }
     }
+    val product: LiveData<ProductResponse> = _product
 
 }
