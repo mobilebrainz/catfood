@@ -46,17 +46,14 @@ class SearchFragment : BaseFragment() {
     private fun bindState() {
         val adapter = ProductsAdapter()
         binding.list.adapter = adapter
-
         bindSearch()
         bindList(adapter)
     }
 
     private fun bindSearch() {
-
         binding.searchView.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_GO) {
-                updateListFromInput(pagedProductsViewModel.accept)
-                hideSoftKeyboardExt()
+                updateListFromInput()
                 true
             } else {
                 false
@@ -64,32 +61,30 @@ class SearchFragment : BaseFragment() {
         }
         binding.searchView.setOnKeyListener { _, keyCode, event ->
             if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-                updateListFromInput(pagedProductsViewModel.accept)
-                hideSoftKeyboardExt()
+                updateListFromInput()
                 true
             } else {
                 false
             }
         }
-
         pagedProductsViewModel.state.map { it.query.searchQuery }.distinctUntilChanged()
             .observe(viewLifecycleOwner, binding.searchView::setText)
     }
 
-    private fun updateListFromInput(onQueryChanged: (UiAction.Search) -> Unit) {
+    private fun updateListFromInput() {
         binding.searchView.text.trim().let {
             if (it.isNotEmpty()) {
                 binding.list.scrollToPosition(0)
+                hideSoftKeyboardExt()
                 val query = Query(KeyType.PRODUCTS)
                 query.searchQuery = it.toString()
-                onQueryChanged(UiAction.Search(query))
+                pagedProductsViewModel.accept(UiAction.Search(query))
             }
         }
     }
 
     private fun bindList(adapter: ProductsAdapter) {
         setupScrollListener(pagedProductsViewModel.accept)
-
         pagedProductsViewModel.state.map(UiState::searchResult).distinctUntilChanged()
             .observe(viewLifecycleOwner) { result ->
                 when (result) {
@@ -125,7 +120,6 @@ class SearchFragment : BaseFragment() {
         })
     }
 
-    // add dividers between RecyclerView's row items
     private fun addDividers() {
         val decoration = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
         binding.list.addItemDecoration(decoration)

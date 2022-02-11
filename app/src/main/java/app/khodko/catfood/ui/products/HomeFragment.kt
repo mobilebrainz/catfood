@@ -10,12 +10,13 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.khodko.catfood.R
+import app.khodko.catfood.api.onliner.BrandType
 import app.khodko.catfood.api.onliner.CatFoodType
 import app.khodko.catfood.api.onliner.KeyType
 import app.khodko.catfood.api.onliner.Query
 import app.khodko.catfood.core.BaseFragment
 import app.khodko.catfood.core.extension.getViewModelExt
-import app.khodko.catfood.core.extension.navigateExt
+import app.khodko.catfood.core.extension.showSelectDialogExt
 import app.khodko.catfood.data.SearchResult
 import app.khodko.catfood.databinding.FragmentHomeBinding
 import com.google.android.material.chip.ChipGroup
@@ -63,18 +64,28 @@ class HomeFragment : BaseFragment() {
                 R.id.tastyChip -> CatFoodType.TASTY
                 else -> null
             }
-            updateListFromInput(foodType, pagedProductsViewModel.accept)
+            filterByFoodType(foodType)
         }
     }
 
-    private fun updateListFromInput(typefood: CatFoodType?, onQueryChanged: (UiAction.Search) -> Unit) {
+    private fun filterByFoodType(typefood: CatFoodType?) {
         val stateTypeFood = pagedProductsViewModel.state.value?.query?.typefood
         if (typefood != stateTypeFood) {
             binding.recycler.scrollToPosition(0)
             val query = Query(KeyType.CATFOOD)
             query.typefood = typefood
-            onQueryChanged(UiAction.Search(query))
+            query.brand = pagedProductsViewModel.state.value?.query?.brand
+            pagedProductsViewModel.accept(UiAction.Search(query))
         }
+    }
+
+    private fun filterByBrand(brandType: BrandType) {
+        val stateTypeFood = pagedProductsViewModel.state.value?.query?.typefood
+        binding.recycler.scrollToPosition(0)
+        val query = Query(KeyType.CATFOOD)
+        query.typefood = stateTypeFood
+        query.brand = if (brandType == BrandType.EVERYTHING) null else brandType
+        pagedProductsViewModel.accept(UiAction.Search(query))
     }
 
     private fun bindList(adapter: ProductsAdapter) {
@@ -130,7 +141,9 @@ class HomeFragment : BaseFragment() {
     override fun onOptionsItemSelected(item: MenuItem) =
         when (item.itemId) {
             R.id.filter -> {
-                navigateExt(HomeFragmentDirections.actionNavHomeToNavFilter())
+                val brands = BrandType.values().toList()
+                showSelectDialogExt(brands, R.string.dialog_select_brand)
+                    { _, i -> filterByBrand(BrandType.values()[i]) }
                 true
             }
             else -> false

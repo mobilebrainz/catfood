@@ -41,7 +41,7 @@ class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private fun showRepoData(product: ProductResponse) {
         this.product = product
 
-        nameView.text = product.name
+        nameView.text = product.fullName
         descriptionView.text = product.description
 
         showPrice(product)
