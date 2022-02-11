@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.khodko.catfood.R
+import app.khodko.catfood.api.onliner.CatFoodType
 import app.khodko.catfood.api.onliner.KeyType
 import app.khodko.catfood.api.onliner.Query
 import app.khodko.catfood.core.BaseFragment
@@ -17,6 +18,7 @@ import app.khodko.catfood.core.extension.getViewModelExt
 import app.khodko.catfood.core.extension.navigateExt
 import app.khodko.catfood.data.SearchResult
 import app.khodko.catfood.databinding.FragmentHomeBinding
+import com.google.android.material.chip.ChipGroup
 
 
 class HomeFragment : BaseFragment() {
@@ -48,42 +50,32 @@ class HomeFragment : BaseFragment() {
         val adapter = ProductsAdapter()
         binding.recycler.adapter = adapter
 
-        //bindSearch()
+        bindFilter()
         bindList(adapter)
     }
 
-    // todo: change on filter
-    /*
-    private fun bindSearch() {
-        binding.searchRepo.setOnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_GO) {
-                updateRepoListFromInput(searchViewModel.accept)
-                true
-            } else {
-                false
+    private fun bindFilter() {
+        binding.typeFoodChipGroup.setOnCheckedChangeListener { _: ChipGroup?, checkedId: Int ->
+            val foodType = when(checkedId) {
+                R.id.dryfoodChip -> CatFoodType.DRYFOOD
+                R.id.cannedChip -> CatFoodType.CANNED
+                R.id.preservsChip -> CatFoodType.PRESERVS
+                R.id.tastyChip -> CatFoodType.TASTY
+                else -> null
             }
+            updateListFromInput(foodType, pagedProductsViewModel.accept)
         }
-        binding.searchRepo.setOnKeyListener { _, keyCode, event ->
-            if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-                updateRepoListFromInput(searchViewModel.accept)
-                true
-            } else {
-                false
-            }
-        }
-        searchViewModel.state.map(UiState::query).distinctUntilChanged()
-            .observe(viewLifecycleOwner, binding.searchRepo::setText)
     }
 
-    private fun updateRepoListFromInput(onQueryChanged: (UiAction.Search) -> Unit) {
-        binding.searchRepo.text.trim().let {
-            if (it.isNotEmpty()) {
-                binding.recycler.scrollToPosition(0)
-                onQueryChanged(UiAction.Search(query = it.toString()))
-            }
+    private fun updateListFromInput(typefood: CatFoodType?, onQueryChanged: (UiAction.Search) -> Unit) {
+        val stateTypeFood = pagedProductsViewModel.state.value?.query?.typefood
+        if (typefood != stateTypeFood) {
+            binding.recycler.scrollToPosition(0)
+            val query = Query(KeyType.CATFOOD)
+            query.typefood = typefood
+            onQueryChanged(UiAction.Search(query))
         }
     }
-    */
 
     private fun bindList(adapter: ProductsAdapter) {
         setupScrollListener(pagedProductsViewModel.accept)
@@ -123,7 +115,6 @@ class HomeFragment : BaseFragment() {
         })
     }
 
-    // add dividers between RecyclerView's row items
     private fun addDividers() {
         val decoration = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
         binding.recycler.addItemDecoration(decoration)

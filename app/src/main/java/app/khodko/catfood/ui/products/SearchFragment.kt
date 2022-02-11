@@ -55,7 +55,7 @@ class SearchFragment : BaseFragment() {
 
         binding.searchView.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_GO) {
-                updateRepoListFromInput(pagedProductsViewModel.accept)
+                updateListFromInput(pagedProductsViewModel.accept)
                 hideSoftKeyboardExt()
                 true
             } else {
@@ -64,7 +64,7 @@ class SearchFragment : BaseFragment() {
         }
         binding.searchView.setOnKeyListener { _, keyCode, event ->
             if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-                updateRepoListFromInput(pagedProductsViewModel.accept)
+                updateListFromInput(pagedProductsViewModel.accept)
                 hideSoftKeyboardExt()
                 true
             } else {
@@ -76,7 +76,7 @@ class SearchFragment : BaseFragment() {
             .observe(viewLifecycleOwner, binding.searchView::setText)
     }
 
-    private fun updateRepoListFromInput(onQueryChanged: (UiAction.Search) -> Unit) {
+    private fun updateListFromInput(onQueryChanged: (UiAction.Search) -> Unit) {
         binding.searchView.text.trim().let {
             if (it.isNotEmpty()) {
                 binding.list.scrollToPosition(0)
