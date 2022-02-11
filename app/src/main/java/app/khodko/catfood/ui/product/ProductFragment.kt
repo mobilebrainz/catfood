@@ -5,11 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import app.khodko.catfood.R
+import app.khodko.catfood.core.BaseFragment
 import app.khodko.catfood.core.extension.getViewModelExt
+import app.khodko.catfood.data.ProductResult
+import app.khodko.catfood.data.SearchResult
 import app.khodko.catfood.databinding.FragmentProductBinding
 
 
-class ProductFragment : Fragment() {
+class ProductFragment : BaseFragment() {
 
     private var _binding: FragmentProductBinding? = null
     private val binding get() = _binding!!
@@ -32,7 +36,15 @@ class ProductFragment : Fragment() {
 
     private fun initObservers() {
         productViewModel.product.observe(viewLifecycleOwner) {
-           val i = 0
+            when (it) {
+                is ProductResult.Success -> {
+
+                }
+                is ProductResult.Error -> {
+                    showErrorSnackbar(R.string.error_app, R.string.snackbar_retry)
+                    { productViewModel.load() }
+                }
+            }
         }
     }
 

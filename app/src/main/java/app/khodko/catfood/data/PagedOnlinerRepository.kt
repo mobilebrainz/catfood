@@ -58,10 +58,10 @@ class PagedOnlinerRepository {
 
             results.emit(SearchResult.Success(newList))
             successful = true
-        } catch (exception: IOException) {
-            results.emit(SearchResult.Error(exception))
-        } catch (exception: HttpException) {
-            results.emit(SearchResult.Error(exception))
+        } catch (e: IOException) {
+            results.emit(SearchResult.Error(e))
+        } catch (e: HttpException) {
+            results.emit(SearchResult.Error(e))
         }
         isRequestInProgress = false
         return successful
