@@ -9,7 +9,8 @@ import androidx.lifecycle.LifecycleObserver
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.snackbar.Snackbar.LENGTH_INDEFINITE
 import com.google.android.material.snackbar.Snackbar.LENGTH_LONG
-
+import app.khodko.catfood.R
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 abstract class BaseFragment : Fragment(), LifecycleObserver {
 
@@ -22,17 +23,22 @@ abstract class BaseFragment : Fragment(), LifecycleObserver {
         duration: Int = LENGTH_LONG,
         maxLines: Int = 2
     ) {
-        view?.let {
-            infoSnackbar = Snackbar.make(it, resId, duration).apply {
-                if (maxLines > 2) {
-                    //todo: in future android updates check R.id.snackbar_text
-                    val textView =
-                        view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
-                    textView.maxLines = maxLines
+        val bottomView = activity?.findViewById<BottomNavigationView>(R.id.nav_view)
+        bottomView?.let { b ->
+            view?.let { v ->
+                infoSnackbar = Snackbar.make(v, resId, duration).apply {
+                    anchorView = b
+                    if (maxLines > 2) {
+                        //todo: in future android updates check R.id.snackbar_text
+                        val textView =
+                            v.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
+                        textView.maxLines = maxLines
+                    }
+                    show()
                 }
-                show()
             }
         }
+
     }
 
     @MainThread
@@ -41,10 +47,15 @@ abstract class BaseFragment : Fragment(), LifecycleObserver {
         @StringRes actionResId: Int,
         listener: (v: View) -> Unit
     ) {
-        view?.let {
-            errorSnackbar = Snackbar.make(it, messageResId, LENGTH_INDEFINITE)
-            errorSnackbar?.setAction(actionResId, View.OnClickListener(listener::invoke))?.show()
+        val bottomView = activity?.findViewById<BottomNavigationView>(R.id.nav_view)
+        bottomView?.let { b ->
+            view?.let { v ->
+                errorSnackbar = Snackbar.make(v, messageResId, LENGTH_INDEFINITE)
+                errorSnackbar!!.anchorView = b
+                errorSnackbar?.setAction(actionResId, View.OnClickListener(listener::invoke))?.show()
+            }
         }
+
     }
 
     protected fun dismissErrorSnackbar() {

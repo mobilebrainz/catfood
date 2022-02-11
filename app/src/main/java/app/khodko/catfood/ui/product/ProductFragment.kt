@@ -38,7 +38,8 @@ class ProductFragment : BaseFragment() {
         productViewModel.product.observe(viewLifecycleOwner) {
             when (it) {
                 is ProductResult.Success -> {
-
+                    showErrorSnackbar(R.string.error_app, R.string.snackbar_retry)
+                    {  }
                 }
                 is ProductResult.Error -> {
                     showErrorSnackbar(R.string.error_app, R.string.snackbar_retry)
