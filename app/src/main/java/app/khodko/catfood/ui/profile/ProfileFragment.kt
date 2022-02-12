@@ -39,6 +39,7 @@ class ProfileFragment : Fragment() {
     private fun show(account: GoogleSignInAccount) {
         with(account) {
             binding.nameView.text = displayName
+            //familyName
             binding.emailView.text = email
             binding.idView.text = id
             //val photo = photoUrl.toString()

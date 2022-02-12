@@ -91,7 +91,9 @@ class ProductFragment : BaseFragment() {
         binding.btnLink.setOnClickListener {
             navigateExt(ProductFragmentDirections.actionNavProductToNavBrowser(product.htmlUrl))
         }
-        //binding.favoritesChip.setOnCheckedChangeListener()
+        binding.favoritesChip.setOnCheckedChangeListener { compoundButton, b ->
+            val i = 0
+        }
 
     }
 
