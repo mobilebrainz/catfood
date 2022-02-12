@@ -8,7 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
-private const val VISIBLE_THRESHOLD = 10
+private const val VISIBLE_THRESHOLD = 8
 
 class PagedProductsViewModel(defaultQuery: Query) : ViewModel() {
 

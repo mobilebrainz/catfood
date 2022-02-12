@@ -6,11 +6,11 @@ import androidx.annotation.MainThread
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleObserver
+import app.khodko.catfood.R
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.snackbar.Snackbar.LENGTH_INDEFINITE
 import com.google.android.material.snackbar.Snackbar.LENGTH_LONG
-import app.khodko.catfood.R
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 abstract class BaseFragment : Fragment(), LifecycleObserver {
 

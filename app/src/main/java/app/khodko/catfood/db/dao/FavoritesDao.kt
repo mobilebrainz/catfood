@@ -12,7 +12,7 @@ interface FavoritesDao {
     @Delete
     suspend fun delete(favorites: Favorites)
 
-    @Query("SELECT * FROM favorites WHERE user_id = :userId ORDER BY id ASC")
+    @Query("SELECT * FROM favorites WHERE user_id = :userId")
     suspend fun getAllFavorites(userId: String): List<Favorites>
 
     @Query("SELECT * FROM favorites WHERE user_id = :userId AND product_key = :productKey")

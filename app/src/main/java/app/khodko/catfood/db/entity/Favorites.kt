@@ -1,16 +1,17 @@
-
 package app.khodko.catfood.db.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.PrimaryKey
 
-@Entity(tableName = "favorites")
+@Entity(
+    tableName = "favorites",
+    primaryKeys = ["user_id", "product_key"]
+)
 data class Favorites(
     @ColumnInfo(name = "user_id") val userId: String,
     @ColumnInfo(name = "product_key") val productKey: String,
 ) {
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
-    var id: Long = 0
+    @ColumnInfo(name = "name") var name: String? = null
+    @ColumnInfo(name = "description") var description: String? = null
+    @ColumnInfo(name = "image_url") var imageUrl: String? = null
 }

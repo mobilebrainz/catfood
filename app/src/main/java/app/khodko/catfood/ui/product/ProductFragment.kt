@@ -4,16 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import app.khodko.catfood.R
 import app.khodko.catfood.api.onliner.ProductResponse
 import app.khodko.catfood.core.BaseFragment
+import app.khodko.catfood.core.extension.getActivityViewModelExt
 import app.khodko.catfood.core.extension.getViewModelExt
 import app.khodko.catfood.core.extension.navigateExt
 import app.khodko.catfood.core.extension.showExt
 import app.khodko.catfood.data.ProductResult
-import app.khodko.catfood.data.SearchResult
 import app.khodko.catfood.databinding.FragmentProductBinding
+import app.khodko.catfood.db.entity.Favorites
+import app.khodko.catfood.ui.activity.MainViewModel
 
 
 class ProductFragment : BaseFragment() {
@@ -21,7 +22,7 @@ class ProductFragment : BaseFragment() {
     private var _binding: FragmentProductBinding? = null
     private val binding get() = _binding!!
     private lateinit var productViewModel: ProductViewModel
-    private lateinit var product: ProductResponse
+    private var userId: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,6 +34,7 @@ class ProductFragment : BaseFragment() {
             val args = ProductFragmentArgs.fromBundle(it)
             val key = args.key
             productViewModel = getViewModelExt { ProductViewModel(key) }
+            userId = getActivityViewModelExt { MainViewModel() }.account?.id
             initObservers()
         }
         return binding.root
@@ -42,13 +44,12 @@ class ProductFragment : BaseFragment() {
         productViewModel.product.observe(viewLifecycleOwner) {
             when (it) {
                 is ProductResult.Success -> {
-                    product = it.data
-                    with(product) {
+                    with(it.data) {
                         binding.nameView.text = fullName
                         binding.descriptionView.text = description
-                        showPrice(product)
-                        showImage(product)
-                        initListeners(product)
+                        showPrice(this)
+                        showImage(this)
+                        initListeners(this)
                     }
                 }
                 is ProductResult.Error -> {
@@ -91,8 +92,19 @@ class ProductFragment : BaseFragment() {
         binding.btnLink.setOnClickListener {
             navigateExt(ProductFragmentDirections.actionNavProductToNavBrowser(product.htmlUrl))
         }
-        binding.favoritesChip.setOnCheckedChangeListener { compoundButton, b ->
-            val i = 0
+
+        binding.favoritesChip.setOnCheckedChangeListener { _, b ->
+            userId?.let {
+                if (b) {
+                    val favorites = Favorites(it, product.key)
+                    favorites.name = product.name
+                    favorites.description = product.description
+                    favorites.imageUrl = product.images?.header
+                    productViewModel.saveFavorites(favorites)
+                } else {
+                    productViewModel.deleteFavorites(it)
+                }
+            }
         }
 
     }
