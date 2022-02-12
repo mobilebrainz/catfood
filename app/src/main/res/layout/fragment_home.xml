@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/swipeRefreshLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/appBackground"
     tools:context=".ui.products.HomeFragment">
 
     <LinearLayout
+        android:id="@+id/mainLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -31,10 +31,10 @@
                     android:layout_height="wrap_content"
                     android:checkable="true"
                     android:checked="false"
-                    android:textColor="@color/textColorOnDark"
                     android:text="@string/chip_everything"
-                    app:chipBackgroundColor="@color/chip_colors"
-                    android:theme="@style/Theme.MaterialComponents.Light" />
+                    android:textColor="@color/textColorOnDark"
+                    android:theme="@style/Theme.MaterialComponents.Light"
+                    app:chipBackgroundColor="@color/chip_colors" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/dryfoodChip"
@@ -42,10 +42,10 @@
                     android:layout_height="wrap_content"
                     android:checkable="true"
                     android:checked="false"
-                    android:textColor="@color/textColorOnDark"
                     android:text="@string/chip_dryfood"
-                    app:chipBackgroundColor="@color/chip_colors"
-                    android:theme="@style/Theme.MaterialComponents.Light" />
+                    android:textColor="@color/textColorOnDark"
+                    android:theme="@style/Theme.MaterialComponents.Light"
+                    app:chipBackgroundColor="@color/chip_colors" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/cannedChip"
@@ -53,10 +53,10 @@
                     android:layout_height="wrap_content"
                     android:checkable="true"
                     android:checked="false"
-                    android:textColor="@color/textColorOnDark"
                     android:text="@string/chip_canned"
-                    app:chipBackgroundColor="@color/chip_colors"
-                    android:theme="@style/Theme.MaterialComponents.Light" />
+                    android:textColor="@color/textColorOnDark"
+                    android:theme="@style/Theme.MaterialComponents.Light"
+                    app:chipBackgroundColor="@color/chip_colors" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/preservsChip"
@@ -64,10 +64,10 @@
                     android:layout_height="wrap_content"
                     android:checkable="true"
                     android:checked="false"
-                    android:textColor="@color/textColorOnDark"
                     android:text="@string/chip_preservs"
-                    app:chipBackgroundColor="@color/chip_colors"
-                    android:theme="@style/Theme.MaterialComponents.Light" />
+                    android:textColor="@color/textColorOnDark"
+                    android:theme="@style/Theme.MaterialComponents.Light"
+                    app:chipBackgroundColor="@color/chip_colors" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/tastyChip"
@@ -75,10 +75,10 @@
                     android:layout_height="wrap_content"
                     android:checkable="true"
                     android:checked="false"
-                    android:textColor="@color/textColorOnDark"
                     android:text="@string/chip_tasty"
-                    app:chipBackgroundColor="@color/chip_colors"
-                    android:theme="@style/Theme.MaterialComponents.Light" />
+                    android:textColor="@color/textColorOnDark"
+                    android:theme="@style/Theme.MaterialComponents.Light"
+                    app:chipBackgroundColor="@color/chip_colors" />
 
             </com.google.android.material.chip.ChipGroup>
 
@@ -109,4 +109,14 @@
 
     </LinearLayout>
 
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    <ProgressBar
+        android:id="@+id/progressView"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:indeterminateOnly="true"
+        android:progressDrawable="@drawable/progress_circle" />
+
+</FrameLayout>
+

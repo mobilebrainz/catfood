@@ -9,6 +9,7 @@ import app.khodko.catfood.R
 import app.khodko.catfood.api.onliner.ProductResponse
 import app.khodko.catfood.core.BaseFragment
 import app.khodko.catfood.core.extension.getViewModelExt
+import app.khodko.catfood.core.extension.navigateExt
 import app.khodko.catfood.core.extension.showExt
 import app.khodko.catfood.data.ProductResult
 import app.khodko.catfood.data.SearchResult
@@ -34,7 +35,6 @@ class ProductFragment : BaseFragment() {
             productViewModel = getViewModelExt { ProductViewModel(key) }
             initObservers()
         }
-        binding.swipeRefreshLayout.isEnabled = false
         return binding.root
     }
 
@@ -89,9 +89,10 @@ class ProductFragment : BaseFragment() {
 
     private fun initListeners(product: ProductResponse) {
         binding.btnLink.setOnClickListener {
-            val link = product.htmlUrl
-            // todo: web-view
+            navigateExt(ProductFragmentDirections.actionNavProductToNavBrowser(product.htmlUrl))
         }
+        //binding.favoritesChip.setOnCheckedChangeListener()
+
     }
 
     override fun onDestroyView() {

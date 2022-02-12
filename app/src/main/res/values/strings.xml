@@ -6,6 +6,7 @@
     <string name="title_product">Product</string>
     <string name="title_profile">Profile</string>
     <string name="title_info">Info</string>
+    <string name="title_browser">Browser</string>
     <string name="options_logout">LogOut</string>
     <string name="helper_pager_footer">Page %1$d of %2$d</string>
     <string name="prices">Prices</string>

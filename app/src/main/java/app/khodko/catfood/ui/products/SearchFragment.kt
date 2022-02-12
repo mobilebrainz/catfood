@@ -48,7 +48,6 @@ class SearchFragment : BaseFragment() {
         val adapter = ProductsAdapter()
         binding.list.adapter = adapter
         adapter.shotClickListener = { item, _ ->
-            //if (!swipeRefreshLayout.isRefreshing)
             navigateExt(SearchFragmentDirections.actionNavSearchToNavProduct(item.key))
         }
         bindSearch()
@@ -83,6 +82,7 @@ class SearchFragment : BaseFragment() {
                 hideSoftKeyboardExt()
                 val query = Query(KeyType.PRODUCTS)
                 query.searchQuery = it.toString()
+                showProgress()
                 pagedProductsViewModel.accept(UiAction.Search(query))
             }
         }
@@ -92,6 +92,7 @@ class SearchFragment : BaseFragment() {
         setupScrollListener(pagedProductsViewModel.accept)
         pagedProductsViewModel.state.map(UiState::searchResult).distinctUntilChanged()
             .observe(viewLifecycleOwner) { result ->
+                dissmissProgress()
                 when (result) {
                     is SearchResult.Success -> {
                         showEmptyList(result.data.isEmpty())
@@ -99,7 +100,10 @@ class SearchFragment : BaseFragment() {
                     }
                     is SearchResult.Error -> {
                         showErrorSnackbar(R.string.error_app, R.string.snackbar_retry)
-                            { pagedProductsViewModel.retry() }
+                            {
+                                pagedProductsViewModel.retry()
+                                showProgress()
+                            }
                     }
                 }
             }
@@ -123,6 +127,14 @@ class SearchFragment : BaseFragment() {
                 )
             }
         })
+    }    private fun showProgress() {
+        binding.progressView.visibility = View.VISIBLE
+        binding.mainLayout.alpha = 0.3f
+    }
+
+    private fun dissmissProgress() {
+        binding.progressView.visibility = View.GONE
+        binding.mainLayout.alpha = 1.0f
     }
 
     private fun addDividers() {

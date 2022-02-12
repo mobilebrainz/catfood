@@ -9,7 +9,7 @@
         android:id="@+id/nav_home"
         android:name="app.khodko.catfood.ui.products.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_nav_home_to_nav_product"
             app:destination="@id/nav_product" />
@@ -19,7 +19,7 @@
         android:id="@+id/nav_search"
         android:name="app.khodko.catfood.ui.products.SearchFragment"
         android:label="@string/title_search"
-        tools:layout="@layout/fragment_search" >
+        tools:layout="@layout/fragment_search">
         <action
             android:id="@+id/action_nav_search_to_nav_product"
             app:destination="@id/nav_product" />
@@ -29,9 +29,23 @@
         android:id="@+id/nav_product"
         android:name="app.khodko.catfood.ui.product.ProductFragment"
         android:label="@string/title_product"
-        tools:layout="@layout/fragment_product" >
+        tools:layout="@layout/fragment_product">
         <argument
             android:name="key"
+            app:argType="string"
+            app:nullable="false" />
+        <action
+            android:id="@+id/action_nav_product_to_nav_browser"
+            app:destination="@id/nav_browser" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_browser"
+        android:name="app.khodko.catfood.ui.browser.BrowserFragment"
+        android:label="@string/title_browser"
+        tools:layout="@layout/fragment_browser">
+        <argument
+            android:name="link"
             app:argType="string"
             app:nullable="false" />
     </fragment>

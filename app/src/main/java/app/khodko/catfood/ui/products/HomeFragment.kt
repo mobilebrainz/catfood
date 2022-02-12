@@ -44,7 +44,6 @@ class HomeFragment : BaseFragment() {
         pagedProductsViewModel = getViewModelExt { PagedProductsViewModel(defaultQuery) }
         addDividers()
         bindState()
-        binding.swipeRefreshLayout.isEnabled = false
         return binding.root
     }
 
@@ -79,6 +78,7 @@ class HomeFragment : BaseFragment() {
             val query = Query(KeyType.CATFOOD)
             query.typefood = typefood
             query.brand = pagedProductsViewModel.state.value?.query?.brand
+            showProgress()
             pagedProductsViewModel.accept(UiAction.Search(query))
         }
     }
@@ -89,6 +89,7 @@ class HomeFragment : BaseFragment() {
         val query = Query(KeyType.CATFOOD)
         query.typefood = stateTypeFood
         query.brand = if (brandType == BrandType.EVERYTHING) null else brandType
+        showProgress()
         pagedProductsViewModel.accept(UiAction.Search(query))
     }
 
@@ -97,6 +98,7 @@ class HomeFragment : BaseFragment() {
 
         pagedProductsViewModel.state.map(UiState::searchResult).distinctUntilChanged()
             .observe(viewLifecycleOwner) { result ->
+                dissmissProgress()
                 when (result) {
                     is SearchResult.Success -> {
                         showEmptyList(result.data.isEmpty())
@@ -104,7 +106,10 @@ class HomeFragment : BaseFragment() {
                     }
                     is SearchResult.Error -> {
                         showErrorSnackbar(R.string.error_app, R.string.snackbar_retry)
-                        { pagedProductsViewModel.retry() }
+                        {
+                            pagedProductsViewModel.retry()
+                            showProgress()
+                        }
                     }
                 }
             }
@@ -133,6 +138,16 @@ class HomeFragment : BaseFragment() {
     private fun addDividers() {
         val decoration = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
         binding.recycler.addItemDecoration(decoration)
+    }
+
+    private fun showProgress() {
+        binding.progressView.visibility = View.VISIBLE
+        binding.mainLayout.alpha = 0.3f
+    }
+
+    private fun dissmissProgress() {
+        binding.progressView.visibility = View.GONE
+        binding.mainLayout.alpha = 1.0f
     }
 
     @SuppressLint("RestrictedApi")

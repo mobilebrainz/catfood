@@ -7,6 +7,7 @@
     <string name="title_product">Продукт</string>
     <string name="title_profile">Профиль</string>
     <string name="title_info">Инфо</string>
+    <string name="title_browser">Браузер</string>
     <string name="options_logout">Выход</string>
     <string name="helper_pager_footer">Стр. %1$d of %2$d</string>
     <string name="prices">Цены</string>
