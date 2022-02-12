@@ -10,12 +10,15 @@
     <string name="options_logout">Выход</string>
     <string name="helper_pager_footer">Стр. %1$d of %2$d</string>
     <string name="prices">Цены</string>
+    <string name="offers">предложений</string>
 
     <string name="chip_everything">Все</string>
     <string name="chip_dryfood">Сухой корм</string>
     <string name="chip_canned">Консервы</string>
     <string name="chip_preservs">Пресервы</string>
     <string name="chip_tasty">Лакомство</string>
+    <string name="chip_favorites">Избранное</string>
+    <string name="btn_link">Ссылка</string>
 
     <string name="dialog_select_brand">Выберите производителя</string>
 
