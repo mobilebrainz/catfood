@@ -7,16 +7,21 @@
     android:background="@color/appBackground"
     tools:context=".ui.favorites.FavoritesFragment">
 
+    <TextView
+        android:id="@+id/emptyList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/no_results"
+        android:textSize="24sp"
+        android:visibility="gone" />
 
-
-    <ProgressBar
-        android:id="@+id/progressView"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_gravity="center"
-        android:indeterminateOnly="true"
-        android:progressDrawable="@drawable/progress_circle" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 </FrameLayout>
 

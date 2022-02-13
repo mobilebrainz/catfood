@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.khodko.catfood.App
-import app.khodko.catfood.data.FavoritesRepository
 import app.khodko.catfood.data.OnlinerRepository
 import app.khodko.catfood.data.ProductResult
 import app.khodko.catfood.db.entity.Favorites
@@ -16,7 +15,7 @@ import java.io.IOException
 class ProductViewModel(val productKey: String) : ViewModel() {
 
     private val onlinerRepository = OnlinerRepository()
-    private val favoritesRepository = FavoritesRepository(App.instance.database.favoritesDao())
+    private val favoritesRepository = App.instance.favoritesRepository
 
     private val _product = MutableLiveData<ProductResult>().apply { load() }
     val product: LiveData<ProductResult> = _product
