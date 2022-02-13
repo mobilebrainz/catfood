@@ -15,6 +15,7 @@
     <string name="offers">предложений</string>
     <string name="profile_name">ФИО: %1$s</string>
     <string name="profile_email">Почта: %1$s</string>
+    <string name="sign_in_title">Войдите в свою учетную запись</string>
 
     <string name="chip_everything">Все</string>
     <string name="chip_dryfood">Сухой корм</string>
@@ -28,7 +29,7 @@
 
     <string name="search_hint">Искать</string>
     <string name="no_results">Нет рузультатов 😓</string>
-    <string name="loading">Загрузка...</string>
+    <string name="loading">Загрузка…</string>
     <string name="error_app">Ошибка соединения!</string>
     <string name="snackbar_retry">Повторить</string>
 </resources>
