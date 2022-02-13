@@ -1,4 +1,4 @@
-package app.khodko.catfood.activity
+package app.khodko.catfood.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,8 +6,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import app.khodko.catfood.databinding.ActivitySignInBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.common.ConnectionResult
-import com.google.android.gms.common.api.internal.OnConnectionFailedListener
 
 
 class SignInActivity : BaseSignInActivity() {
@@ -36,7 +34,6 @@ class SignInActivity : BaseSignInActivity() {
         val signInIntent = getGoogleSinginClient().signInIntent
         signInResult.launch(signInIntent)
     }
-
 
     private fun handleSignData(data: Intent?) {
         GoogleSignIn.getSignedInAccountFromIntent(data)

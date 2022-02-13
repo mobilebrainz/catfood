@@ -1,9 +1,10 @@
-package app.khodko.catfood.activity
+package app.khodko.catfood.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -19,6 +20,7 @@ class MainActivity : BaseSignInActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var navController: NavController
+    private lateinit var mainViewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,15 +28,18 @@ class MainActivity : BaseSignInActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
 
+        mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
+
         val navView: BottomNavigationView = binding.navView
         navController = findNavController(R.id.nav_host_fragment_activity_main)
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.nav_home, R.id.nav_profile, R.id.nav_info)
+            setOf(R.id.nav_home, R.id.nav_search, R.id.nav_profile, R.id.nav_info)
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
         if (!isUserSignedIn()) startSignInActivity()
+        mainViewModel.account = account
     }
 
     override fun onSupportNavigateUp(): Boolean {

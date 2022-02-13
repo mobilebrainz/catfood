@@ -27,7 +27,7 @@
     <color name="textColorRequied">@color/md_red_700</color>
 
     <!-- app colors -->
-    <color name="appBackground">@color/md_blue_grey_50</color>
+    <color name="appBackground">@color/md_white_1000</color>
     <color name="cardBackground">@color/md_white_1000</color>
     <color name="colorLight">@color/md_blue_grey_300</color>
 </resources>
