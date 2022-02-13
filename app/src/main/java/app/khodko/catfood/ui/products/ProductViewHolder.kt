@@ -16,25 +16,21 @@ class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val nameView: TextView = view.findViewById(R.id.nameView)
     private val descriptionView: TextView = view.findViewById(R.id.descriptionView)
     private val priceView: TextView = view.findViewById(R.id.priceView)
-    private var product: Product? = null
 
     fun bind(product: Product?) {
         if (product == null) {
             val resources = itemView.resources
             nameView.text = resources.getString(R.string.loading)
         } else {
-            showRepoData(product)
+            showData(product)
+            showPrice(product)
+            showImage(product)
         }
     }
 
-    private fun showRepoData(product: Product) {
-        this.product = product
-
+    private fun showData(product: Product) {
         nameView.text = product.fullName
         descriptionView.text = product.description
-
-        showPrice(product)
-        showImage(product)
     }
 
     private fun showPrice(product: Product) {
