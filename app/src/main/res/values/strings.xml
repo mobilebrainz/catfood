@@ -5,6 +5,7 @@
     <string name="title_search">Search</string>
     <string name="title_product">Product</string>
     <string name="title_profile">Profile</string>
+    <string name="title_favorites">Favorites</string>
     <string name="title_info">Info</string>
     <string name="title_browser">Browser</string>
     <string name="options_logout">LogOut</string>

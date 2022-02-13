@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import app.khodko.catfood.core.extension.getActivityViewModelExt
 import app.khodko.catfood.core.extension.getViewModelExt
+import app.khodko.catfood.core.extension.navigateExt
 import app.khodko.catfood.core.extension.showExt
 import app.khodko.catfood.databinding.FragmentProfileBinding
 import app.khodko.catfood.ui.activity.MainViewModel
@@ -31,6 +32,9 @@ class ProfileFragment : Fragment() {
 
         account?.let {
             show(it)
+            binding.btnFavorites.setOnClickListener {
+                navigateExt(ProfileFragmentDirections.actionNavProfileToNavFavorites())
+            }
         }
 
         return binding.root

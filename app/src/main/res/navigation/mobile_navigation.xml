@@ -54,7 +54,17 @@
         android:id="@+id/nav_profile"
         android:name="app.khodko.catfood.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_nav_profile_to_nav_favorites"
+            app:destination="@id/nav_favorites" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_favorites"
+        android:name="app.khodko.catfood.ui.favorites.FavoritesFragment"
+        android:label="@string/title_favorites"
+        tools:layout="@layout/fragment_favorites" />
 
     <fragment
         android:id="@+id/nav_info"
