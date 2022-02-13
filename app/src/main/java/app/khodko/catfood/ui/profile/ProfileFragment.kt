@@ -12,6 +12,7 @@ import app.khodko.catfood.core.extension.showExt
 import app.khodko.catfood.databinding.FragmentProfileBinding
 import app.khodko.catfood.ui.activity.MainViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import app.khodko.catfood.R
 
 class ProfileFragment : Fragment() {
 
@@ -42,12 +43,10 @@ class ProfileFragment : Fragment() {
 
     private fun show(account: GoogleSignInAccount) {
         with(account) {
-            binding.nameView.text = displayName
-            //familyName
-            binding.emailView.text = email
-            binding.idView.text = id
-            //val photo = photoUrl.toString()
-            val photo = "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Golden_star.svg/512px-Golden_star.svg.png"
+            binding.nameView.text = getString(R.string.profile_name, displayName)
+            binding.emailView.text = getString(R.string.profile_email, email)
+            val photo = photoUrl.toString()
+            //val photo = "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Golden_star.svg/512px-Golden_star.svg.png"
             binding.imageView.showExt(photo)
         }
     }

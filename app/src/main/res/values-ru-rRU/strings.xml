@@ -13,6 +13,8 @@
     <string name="helper_pager_footer">Стр. %1$d of %2$d</string>
     <string name="prices">Цены</string>
     <string name="offers">предложений</string>
+    <string name="profile_name">ФИО: %1$s</string>
+    <string name="profile_email">Почта: %1$s</string>
 
     <string name="chip_everything">Все</string>
     <string name="chip_dryfood">Сухой корм</string>
