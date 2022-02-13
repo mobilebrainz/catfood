@@ -36,6 +36,7 @@ class ProductFragment : BaseFragment() {
             productViewModel = getViewModelExt { ProductViewModel(key) }
             userId = getActivityViewModelExt { MainViewModel() }.account?.id
             initObservers()
+            productViewModel.existFavorites(userId)
         }
         return binding.root
     }
@@ -57,6 +58,9 @@ class ProductFragment : BaseFragment() {
                     { productViewModel.load() }
                 }
             }
+        }
+        productViewModel.isFavorites.observe(viewLifecycleOwner) {
+            it?.let { b -> binding.favoritesChip.isChecked = b }
         }
     }
 

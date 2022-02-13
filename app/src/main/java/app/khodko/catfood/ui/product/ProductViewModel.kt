@@ -21,6 +21,9 @@ class ProductViewModel(val productKey: String) : ViewModel() {
     private val _product = MutableLiveData<ProductResult>().apply { load() }
     val product: LiveData<ProductResult> = _product
 
+    private val _isFavorites = MutableLiveData<Boolean>()
+    val isFavorites: LiveData<Boolean> = _isFavorites
+
     fun load() {
         viewModelScope.launch {
             val value = try {
@@ -43,6 +46,14 @@ class ProductViewModel(val productKey: String) : ViewModel() {
     fun deleteFavorites(userId: String) {
         viewModelScope.launch {
             favoritesRepository.delete(Favorites(userId, productKey))
+        }
+    }
+
+    fun existFavorites(userId: String?) {
+        userId?.let { u ->
+            viewModelScope.launch {
+                _isFavorites.value = favoritesRepository.existFavorites(u, productKey)
+            }
         }
     }
 
