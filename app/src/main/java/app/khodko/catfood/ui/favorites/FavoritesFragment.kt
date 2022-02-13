@@ -33,6 +33,7 @@ class FavoritesFragment : Fragment() {
         userId?.let { u ->
             favoritesViewModel = getViewModelExt { FavoritesViewModel(u) }
             initRecycler()
+            favoritesViewModel.load()
         }
         return binding.root
     }
@@ -48,7 +49,16 @@ class FavoritesFragment : Fragment() {
         }
 
         favoritesViewModel.favorites.observe(viewLifecycleOwner) {
-            it.let { adapter.submitList(it) }
+            it.let {
+                adapter.submitList(it)
+                if (it.isEmpty()) {
+                    binding.list.visibility = View.GONE
+                    binding.emptyList.visibility = View.VISIBLE
+                } else {
+                    binding.list.visibility = View.VISIBLE
+                    binding.emptyList.visibility = View.GONE
+                }
+            }
         }
 
         val itemTouchHelperCallback = object :
