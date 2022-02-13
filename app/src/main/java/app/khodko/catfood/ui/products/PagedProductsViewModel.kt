@@ -3,7 +3,7 @@ package app.khodko.catfood.ui.products
 import androidx.lifecycle.*
 import app.khodko.catfood.api.onliner.Query
 import app.khodko.catfood.data.PagedOnlinerRepository
-import app.khodko.catfood.data.SearchResult
+import app.khodko.catfood.data.ProductsResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
@@ -21,7 +21,7 @@ class PagedProductsViewModel(defaultQuery: Query) : ViewModel() {
         state = queryLiveData.distinctUntilChanged().switchMap { query ->
             liveData {
                 val uiState = repository.start(query)
-                    .map { UiState(query = query, searchResult = it) }
+                    .map { UiState(query = query, productsResult = it) }
                     .asLiveData(Dispatchers.Main)
                 emitSource(uiState)
             }
@@ -53,7 +53,7 @@ private val UiAction.Scroll.shouldFetchMore
 
 data class UiState(
     val query: Query,
-    val searchResult: SearchResult
+    val productsResult: ProductsResult
 )
 
 sealed class UiAction {

@@ -4,12 +4,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import app.khodko.catfood.api.onliner.ProductResponse
+import app.khodko.catfood.api.onliner.Product
 
 
-class ProductsAdapter : ListAdapter<ProductResponse, ProductViewHolder>(REPO_COMPARATOR) {
+class ProductsAdapter : ListAdapter<Product, ProductViewHolder>(REPO_COMPARATOR) {
 
-    var shotClickListener: ((ProductResponse, v: View) -> Unit)? = null
+    var shotClickListener: ((Product, v: View) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         return ProductViewHolder.create(parent)
@@ -26,11 +26,11 @@ class ProductsAdapter : ListAdapter<ProductResponse, ProductViewHolder>(REPO_COM
     }
 
     companion object {
-        private val REPO_COMPARATOR = object : DiffUtil.ItemCallback<ProductResponse>() {
-            override fun areItemsTheSame(oldItem: ProductResponse, newItem: ProductResponse): Boolean =
+        private val REPO_COMPARATOR = object : DiffUtil.ItemCallback<Product>() {
+            override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean =
                 oldItem.id == newItem.id
 
-            override fun areContentsTheSame(oldItem: ProductResponse, newItem: ProductResponse): Boolean =
+            override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean =
                 oldItem == newItem
         }
     }

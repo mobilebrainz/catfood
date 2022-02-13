@@ -15,12 +15,12 @@ interface OnlinerService {
     suspend fun search(
         @Path("key") key: String,
         @QueryMap paramsMap: Map<String, String>
-    ): SearchResponse
+    ): Products
 
     @GET("products/{key}")
     suspend fun getProduct(
         @Path("key") key: String
-    ): ProductResponse
+    ): Product
 
     companion object {
         private const val BASE_URL = "https://catalog.api.onliner.by/"

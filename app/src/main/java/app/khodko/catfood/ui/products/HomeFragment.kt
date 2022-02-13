@@ -18,7 +18,7 @@ import app.khodko.catfood.core.BaseFragment
 import app.khodko.catfood.core.extension.getViewModelExt
 import app.khodko.catfood.core.extension.navigateExt
 import app.khodko.catfood.core.extension.showSelectDialogExt
-import app.khodko.catfood.data.SearchResult
+import app.khodko.catfood.data.ProductsResult
 import app.khodko.catfood.databinding.FragmentHomeBinding
 import com.google.android.material.chip.ChipGroup
 
@@ -96,15 +96,15 @@ class HomeFragment : BaseFragment() {
     private fun bindList(adapter: ProductsAdapter) {
         setupScrollListener(pagedProductsViewModel.accept)
 
-        pagedProductsViewModel.state.map(UiState::searchResult).distinctUntilChanged()
+        pagedProductsViewModel.state.map(UiState::productsResult).distinctUntilChanged()
             .observe(viewLifecycleOwner) { result ->
                 dissmissProgress()
                 when (result) {
-                    is SearchResult.Success -> {
+                    is ProductsResult.Success -> {
                         showEmptyList(result.data.isEmpty())
                         adapter.submitList(result.data)
                     }
-                    is SearchResult.Error -> {
+                    is ProductsResult.Error -> {
                         showErrorSnackbar(R.string.error_app, R.string.snackbar_retry)
                         {
                             pagedProductsViewModel.retry()

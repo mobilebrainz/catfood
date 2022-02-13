@@ -2,7 +2,7 @@ package app.khodko.catfood.data
 
 import android.util.Log
 import app.khodko.catfood.api.onliner.OnlinerService
-import app.khodko.catfood.api.onliner.ProductResponse
+import app.khodko.catfood.api.onliner.Product
 import app.khodko.catfood.api.onliner.Query
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -12,8 +12,8 @@ import java.io.IOException
 class PagedOnlinerRepository {
 
     private val service = OnlinerService.create()
-    private val inMemoryCache = mutableListOf<ProductResponse>()
-    private val results = MutableSharedFlow<SearchResult>(replay = 1)
+    private val inMemoryCache = mutableListOf<Product>()
+    private val results = MutableSharedFlow<ProductsResult>(replay = 1)
     private var lastRequestedPage = 1
     private var lastPage = 1
     private var isRequestInProgress = false
@@ -22,7 +22,7 @@ class PagedOnlinerRepository {
      * Search repositories whose names match the query, exposed as a stream of data that will emit
      * every time we get more data from the network.
      */
-    suspend fun start(query: Query): Flow<SearchResult> {
+    suspend fun start(query: Query): Flow<ProductsResult> {
         lastRequestedPage = 1
         inMemoryCache.clear()
         requestAndSaveData(query)
@@ -53,15 +53,15 @@ class PagedOnlinerRepository {
             Log.d("CatfoodRepository", "response $response")
             inMemoryCache.addAll(response.products)
 
-            val newList = mutableListOf<ProductResponse>()
+            val newList = mutableListOf<Product>()
             newList.addAll(inMemoryCache)
 
-            results.emit(SearchResult.Success(newList))
+            results.emit(ProductsResult.Success(newList))
             successful = true
         } catch (e: IOException) {
-            results.emit(SearchResult.Error(e))
+            results.emit(ProductsResult.Error(e))
         } catch (e: HttpException) {
-            results.emit(SearchResult.Error(e))
+            results.emit(ProductsResult.Error(e))
         }
         isRequestInProgress = false
         return successful

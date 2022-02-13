@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import app.khodko.catfood.R
-import app.khodko.catfood.api.onliner.ProductResponse
+import app.khodko.catfood.api.onliner.Product
 import app.khodko.catfood.core.extension.showExt
 
 class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -16,9 +16,9 @@ class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val nameView: TextView = view.findViewById(R.id.nameView)
     private val descriptionView: TextView = view.findViewById(R.id.descriptionView)
     private val priceView: TextView = view.findViewById(R.id.priceView)
-    private var product: ProductResponse? = null
+    private var product: Product? = null
 
-    fun bind(product: ProductResponse?) {
+    fun bind(product: Product?) {
         if (product == null) {
             val resources = itemView.resources
             nameView.text = resources.getString(R.string.loading)
@@ -27,7 +27,7 @@ class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         }
     }
 
-    private fun showRepoData(product: ProductResponse) {
+    private fun showRepoData(product: Product) {
         this.product = product
 
         nameView.text = product.fullName
@@ -37,7 +37,7 @@ class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         showImage(product)
     }
 
-    private fun showPrice(product: ProductResponse) {
+    private fun showPrice(product: Product) {
         product.prices?.let {
             var priceStr = ""
             it.priceMin?.let { p -> priceStr += p.amount + " " + p.currency }
@@ -55,7 +55,7 @@ class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         }
     }
 
-    private fun showImage(product: ProductResponse) {
+    private fun showImage(product: Product) {
         val imageUrl = product.images?.header
         if (imageUrl != null && imageUrl.isNotEmpty()) {
             productImage.showExt("https://$imageUrl")

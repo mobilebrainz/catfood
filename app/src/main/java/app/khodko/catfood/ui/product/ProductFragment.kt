@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import app.khodko.catfood.R
-import app.khodko.catfood.api.onliner.ProductResponse
+import app.khodko.catfood.api.onliner.Product
 import app.khodko.catfood.core.BaseFragment
 import app.khodko.catfood.core.extension.getActivityViewModelExt
 import app.khodko.catfood.core.extension.getViewModelExt
@@ -64,7 +64,7 @@ class ProductFragment : BaseFragment() {
         }
     }
 
-    private fun showPrice(product: ProductResponse) {
+    private fun showPrice(product: Product) {
         product.prices?.let {
             var priceStr = ""
             it.priceMin?.let { p -> priceStr += p.amount + " " + p.currency }
@@ -83,7 +83,7 @@ class ProductFragment : BaseFragment() {
         }
     }
 
-    private fun showImage(product: ProductResponse) {
+    private fun showImage(product: Product) {
         val imageUrl = product.images?.header
         if (imageUrl != null && imageUrl.isNotEmpty()) {
             binding.imageView.showExt("https://$imageUrl")
@@ -92,7 +92,7 @@ class ProductFragment : BaseFragment() {
         }
     }
 
-    private fun initListeners(product: ProductResponse) {
+    private fun initListeners(product: Product) {
         binding.btnLink.setOnClickListener {
             navigateExt(ProductFragmentDirections.actionNavProductToNavBrowser(product.htmlUrl))
         }
