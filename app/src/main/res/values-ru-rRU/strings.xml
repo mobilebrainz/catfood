@@ -16,6 +16,7 @@
     <string name="profile_name">ФИО: %1$s</string>
     <string name="profile_email">Почта: %1$s</string>
     <string name="sign_in_title">Войдите в свою учетную запись</string>
+    <string name="brand_everything">Все производители</string>
 
     <string name="chip_everything">Все</string>
     <string name="chip_dryfood">Сухой корм</string>
