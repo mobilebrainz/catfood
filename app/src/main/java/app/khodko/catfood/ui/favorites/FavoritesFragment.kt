@@ -5,17 +5,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import app.khodko.catfood.core.BaseFragment
 import app.khodko.catfood.core.extension.getActivityViewModelExt
 import app.khodko.catfood.core.extension.getViewModelExt
 import app.khodko.catfood.core.extension.navigateExt
 import app.khodko.catfood.databinding.FragmentFavoritesBinding
 import app.khodko.catfood.ui.activity.MainViewModel
 
-class FavoritesFragment : Fragment() {
+class FavoritesFragment : BaseFragment() {
 
     private var _binding: FragmentFavoritesBinding? = null
     private val binding get() = _binding!!

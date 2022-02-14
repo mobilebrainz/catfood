@@ -11,6 +11,7 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_gravity="center"
+        android:background="@color/imageBackground"
         android:src="@drawable/ic_image_24"
         tools:ignore="ContentDescription" />
 

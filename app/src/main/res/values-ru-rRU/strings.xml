@@ -24,6 +24,7 @@
     <string name="chip_tasty">Лакомство</string>
     <string name="chip_favorites">Избранное</string>
     <string name="btn_link">Ссылка</string>
+    <string name="switch_themes">Ночная тема</string>
 
     <string name="dialog_select_brand">Выберите производителя</string>
 
