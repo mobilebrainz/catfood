@@ -38,7 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Войдите в свою учетную запись"
+                android:text="@string/sign_in_title"
                 android:textSize="18sp" />
 
             <com.google.android.gms.common.SignInButton

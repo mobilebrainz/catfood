@@ -41,6 +41,7 @@ class SearchFragment : BaseFragment() {
         pagedProductsViewModel = getViewModelExt { PagedProductsViewModel(defaultQuery) }
         addDividers()
         bindState()
+        bindSearch()
         return binding.root
     }
 
@@ -50,7 +51,6 @@ class SearchFragment : BaseFragment() {
         adapter.shotClickListener = { item, _ ->
             navigateExt(SearchFragmentDirections.actionNavSearchToNavProduct(item.key))
         }
-        bindSearch()
         bindList(adapter)
     }
 

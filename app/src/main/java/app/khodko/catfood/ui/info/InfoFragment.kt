@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import app.khodko.catfood.R
 import app.khodko.catfood.core.BaseFragment
-import app.khodko.catfood.core.extension.getViewModelExt
 import app.khodko.catfood.databinding.FragmentInfoBinding
 
 class InfoFragment : BaseFragment() {
@@ -14,14 +13,11 @@ class InfoFragment : BaseFragment() {
     private var _binding: FragmentInfoBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var infoViewModel: InfoViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        infoViewModel = getViewModelExt{ InfoViewModel() }
         _binding = FragmentInfoBinding.inflate(inflater, container, false)
         initPages()
         return binding.root

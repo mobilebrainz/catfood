@@ -42,8 +42,9 @@ class HomeFragment : BaseFragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val defaultQuery = Query(KeyType.CATFOOD)
         pagedProductsViewModel = getViewModelExt { PagedProductsViewModel(defaultQuery) }
-        addDividers()
         bindState()
+        bindFilter()
+        addDividers()
         return binding.root
     }
 
@@ -53,7 +54,6 @@ class HomeFragment : BaseFragment() {
         adapter.shotClickListener = { item, _ ->
             navigateExt(HomeFragmentDirections.actionNavHomeToNavProduct(item.key))
         }
-        bindFilter()
         bindList(adapter)
     }
 

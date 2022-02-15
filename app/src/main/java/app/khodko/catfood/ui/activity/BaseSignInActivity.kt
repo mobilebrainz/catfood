@@ -5,11 +5,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.ConnectionResult
-import com.google.android.gms.common.api.internal.OnConnectionFailedListener
 
 
-abstract class BaseSignInActivity : AppCompatActivity(), OnConnectionFailedListener {
+abstract class BaseSignInActivity : AppCompatActivity() {
 
     protected var account: GoogleSignInAccount? = null
 
@@ -17,7 +15,6 @@ abstract class BaseSignInActivity : AppCompatActivity(), OnConnectionFailedListe
         val gso = GoogleSignInOptions
             .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
-            //.requestProfile()
             .build()
 
         return GoogleSignIn.getClient(this, gso)
@@ -26,10 +23,6 @@ abstract class BaseSignInActivity : AppCompatActivity(), OnConnectionFailedListe
     fun isUserSignedIn(): Boolean {
         account = GoogleSignIn.getLastSignedInAccount(this)
         return account != null
-    }
-
-    override fun onConnectionFailed(p0: ConnectionResult) {
-        TODO("Not yet implemented")
     }
 
 }

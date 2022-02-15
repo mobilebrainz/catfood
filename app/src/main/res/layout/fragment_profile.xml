@@ -19,8 +19,8 @@
             android:layout_height="200dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:src="@drawable/ic_image_24"
             android:background="@color/imageBackground"
+            android:src="@drawable/ic_image_24"
             tools:ignore="ContentDescription" />
 
         <TextView
@@ -28,8 +28,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:textSize="16sp"
             android:textColor="@color/textColorLight"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
         <TextView
@@ -37,8 +37,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:textSize="16sp"
             android:textColor="@color/textColorLight"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.SwitchCompat
@@ -48,9 +48,9 @@
             android:layout_marginTop="10dp"
             android:checked="false"
             android:text="@string/switch_themes"
+            android:textColor="@color/textColorLight"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:textColor="@color/textColorLight"
             app:switchPadding="10dp" />
 
         <Button
@@ -59,6 +59,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="@string/title_favorites" />
+
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/btn_logout" />
 
     </LinearLayout>
 

@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.ItemTouchHelper.LEFT
+import androidx.recyclerview.widget.ItemTouchHelper.RIGHT
 import androidx.recyclerview.widget.RecyclerView
 import app.khodko.catfood.core.BaseFragment
 import app.khodko.catfood.core.extension.getActivityViewModelExt
@@ -19,8 +21,6 @@ class FavoritesFragment : BaseFragment() {
 
     private var _binding: FragmentFavoritesBinding? = null
     private val binding get() = _binding!!
-
-    private var userId: String? = null
     private lateinit var favoritesViewModel: FavoritesViewModel
 
     override fun onCreateView(
@@ -29,7 +29,7 @@ class FavoritesFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentFavoritesBinding.inflate(inflater, container, false)
-        userId = getActivityViewModelExt { MainViewModel() }.account?.id
+        val userId = getActivityViewModelExt { MainViewModel() }.account?.id
         userId?.let { u ->
             favoritesViewModel = getViewModelExt { FavoritesViewModel(u) }
             initRecycler()
@@ -62,7 +62,7 @@ class FavoritesFragment : BaseFragment() {
         }
 
         val itemTouchHelperCallback = object :
-            ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+            ItemTouchHelper.SimpleCallback(0, LEFT or RIGHT) {
             override fun onMove(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,

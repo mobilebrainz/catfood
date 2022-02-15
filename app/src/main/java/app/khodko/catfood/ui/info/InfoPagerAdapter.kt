@@ -12,7 +12,7 @@ class InfoPagerAdapter(private val array: Array<String>) : PagerAdapter() {
 
     override fun getCount() = array.size
 
-    override fun isViewFromObject(view: View, `object`: Any) = view === `object` as View
+    override fun isViewFromObject(view: View, obj: Any) = view === obj as View
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val view = LayoutInflater.from(container.context)
@@ -28,8 +28,8 @@ class InfoPagerAdapter(private val array: Array<String>) : PagerAdapter() {
         return view
     }
 
-    override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
-        container.removeView(`object` as View)
+    override fun destroyItem(container: ViewGroup, position: Int, obj: Any) {
+        container.removeView(obj as View)
     }
 
 }
