@@ -5,13 +5,11 @@ import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import app.khodko.catfood.databinding.ActivitySignInBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
 
 
 class SignInActivity : BaseSignInActivity() {
 
     private lateinit var binding: ActivitySignInBinding
-    private lateinit var googleSignInClient: GoogleSignInClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,7 +17,6 @@ class SignInActivity : BaseSignInActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
 
-        googleSignInClient = getGoogleSinginClient()
         binding.googleSignIn.setOnClickListener { signIn() }
     }
 

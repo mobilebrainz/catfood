@@ -42,8 +42,9 @@ class HomeFragment : BaseFragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val defaultQuery = Query(KeyType.CATFOOD)
         pagedProductsViewModel = getViewModelExt { PagedProductsViewModel(defaultQuery) }
-        addDividers()
         bindState()
+        bindFilter()
+        addDividers()
         return binding.root
     }
 
@@ -51,10 +52,8 @@ class HomeFragment : BaseFragment() {
         val adapter = ProductsAdapter()
         binding.recycler.adapter = adapter
         adapter.shotClickListener = { item, _ ->
-            //if (!swipeRefreshLayout.isRefreshing)
             navigateExt(HomeFragmentDirections.actionNavHomeToNavProduct(item.key))
         }
-        bindFilter()
         bindList(adapter)
     }
 
@@ -152,7 +151,6 @@ class HomeFragment : BaseFragment() {
 
     @SuppressLint("RestrictedApi")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        //menu.clear()
         inflater.inflate(R.menu.home_fragment_options_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
@@ -161,8 +159,11 @@ class HomeFragment : BaseFragment() {
         when (item.itemId) {
             R.id.filter -> {
                 val brands = BrandType.values().toList()
-                showSelectDialogExt(brands, R.string.dialog_select_brand)
-                    { _, i -> filterByBrand(BrandType.values()[i]) }
+                BrandType.EVERYTHING.viewName = getString(R.string.brand_everything)
+                showSelectDialogExt(brands, R.string.dialog_select_brand) { _, i ->
+                    val brandTypes = BrandType.values()[i]
+                    filterByBrand(brandTypes)
+                }
                 true
             }
             else -> false

@@ -18,10 +18,6 @@ class PagedOnlinerRepository {
     private var lastPage = 1
     private var isRequestInProgress = false
 
-    /**
-     * Search repositories whose names match the query, exposed as a stream of data that will emit
-     * every time we get more data from the network.
-     */
     suspend fun start(query: Query): Flow<ProductsResult> {
         lastRequestedPage = 1
         inMemoryCache.clear()

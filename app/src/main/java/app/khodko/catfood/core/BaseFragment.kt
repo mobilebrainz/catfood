@@ -1,9 +1,12 @@
 package app.khodko.catfood.core
 
+import android.content.SharedPreferences
+import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.annotation.MainThread
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleObserver
 import app.khodko.catfood.R
@@ -16,6 +19,20 @@ abstract class BaseFragment : Fragment(), LifecycleObserver {
 
     private var errorSnackbar: Snackbar? = null
     private var infoSnackbar: Snackbar? = null
+    protected lateinit var sharedPreferences: SharedPreferences
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initNightTheme()
+    }
+
+    private fun initNightTheme() {
+        sharedPreferences = requireActivity().getSharedPreferences("night", 0)
+        val booleanValue = sharedPreferences.getBoolean("night_mode", true)
+        if (booleanValue) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
+    }
 
     @MainThread
     protected fun showInfoSnackbar(

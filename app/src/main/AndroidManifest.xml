@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="app.khodko.catfood" >
+    package="app.khodko.catfood">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -12,17 +12,18 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.CatFood" >
+        android:theme="@style/Theme.CatFood">
+
         <activity
             android:name="app.khodko.catfood.ui.activity.SplashActivity"
             android:exported="true"
-            android:theme="@style/SplashTheme" >
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name="app.khodko.catfood.ui.activity.MainActivity"
             android:exported="true"
@@ -31,8 +32,8 @@
 
         <activity
             android:name="app.khodko.catfood.ui.activity.SignInActivity"
-            android:label="@string/sign_in_activity_label"
             android:exported="true"
+            android:label="@string/sign_in_activity_label"
             android:theme="@style/Theme.CatFood.NoActionBar" />
 
     </application>

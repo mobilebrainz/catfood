@@ -1,8 +1,8 @@
 package app.khodko.catfood.api.onliner
 
-enum class BrandType(val type: String, val viewName: String) {
+enum class BrandType(val type: String, var viewName: String) {
 
-    EVERYTHING("", "Everything"),
+    EVERYTHING("", ""),
     ROYAL_CANIN("royalcanin", "Royal Canin"),
     PROPLAN("proplan", "Pro Plan"),
     ACANA("acana", "Acana"),

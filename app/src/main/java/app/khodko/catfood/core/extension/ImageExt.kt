@@ -2,6 +2,8 @@ package app.khodko.catfood.core.extension
 
 import android.graphics.Bitmap
 import android.graphics.Bitmap.CompressFormat.JPEG
+import android.graphics.Color
+import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.widget.ImageView
@@ -31,6 +33,8 @@ fun ImageView.showExt(
     val circularProgressDrawable = CircularProgressDrawable(this.context)
     circularProgressDrawable.strokeWidth = 5f
     circularProgressDrawable.centerRadius = 30f
+    @Suppress("DEPRECATION")
+    circularProgressDrawable.setColorFilter(Color.parseColor("#F57C00"), PorterDuff.Mode.SRC_IN)
     circularProgressDrawable.start()
 
     val requestOptions = RequestOptions()

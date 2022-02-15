@@ -9,13 +9,13 @@
     <string name="title_favorites">Избранное</string>
     <string name="title_info">Инфо</string>
     <string name="title_browser">Браузер</string>
-    <string name="options_logout">Выход</string>
     <string name="helper_pager_footer">Стр. %1$d of %2$d</string>
     <string name="prices">Цены</string>
     <string name="offers">предложений</string>
     <string name="profile_name">ФИО: %1$s</string>
     <string name="profile_email">Почта: %1$s</string>
     <string name="sign_in_title">Войдите в свою учетную запись</string>
+    <string name="brand_everything">Все производители</string>
 
     <string name="chip_everything">Все</string>
     <string name="chip_dryfood">Сухой корм</string>
@@ -24,6 +24,8 @@
     <string name="chip_tasty">Лакомство</string>
     <string name="chip_favorites">Избранное</string>
     <string name="btn_link">Ссылка</string>
+    <string name="switch_themes">Ночная тема</string>
+    <string name="btn_logout">Выйти из аккаунта</string>
 
     <string name="dialog_select_brand">Выберите производителя</string>
 
